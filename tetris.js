@@ -230,10 +230,13 @@ function loop() {
         }
     }
 
+    let boost = score/500;
+
+
     if (figure) {
 
         // фигура сдвигается вниз каждые 25 кадров
-        if (++count > 25) {
+        if (++count > 35 - boost*5) {
             figure.row++;
             count = 0;
 
