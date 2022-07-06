@@ -6,6 +6,7 @@ var actualWidth = 9;
 var actualHeight = 9;
 
 var grid = Math.floor(canvas.width/actualWidth);
+var field = canvas.getBoundingClientRect();
 
 var game = {
 	goes: 0,
@@ -161,9 +162,9 @@ document.addEventListener('mousedown', function (e) {
 		requestAnimationFrame(drawRestart());
 	}
 	//Этот нехороший кусок обязательно нужно будет переписать, но я пока не разбираюсь как, обещаю, что разберусь.
-	else if ((e.clientX<=820) && (e.clientX>=460) && (e.clientY<=480) && (e.clientY>=120)){
-		var actualX = Math.floor((e.clientX-460)/grid);
-		var actualY = Math.floor((e.clientY-120)/grid);
+	else if ((e.clientX<=field.right) && (e.clientX>=field.left) && (e.clientY<=field.bottom) && (e.clientY>=field.top)){
+		var actualX = Math.floor((e.clientX-field.left)/grid);
+		var actualY = Math.floor((e.clientY-field.top)/grid);
 		if (e.which==1){
 			if ((game.cells[actualX][actualY]===9) && (game.goes!=0) && (game.openedCells[actualX][actualY]===0)){
 				alert("You died");
