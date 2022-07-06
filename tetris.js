@@ -70,6 +70,7 @@ let count = 0;
 let figure = getNextFigure();
 let rAF = null;
 let gameOver = false;
+let score = 0;
 
 //showGameOver();
 function getRandomInt(min, max) {
@@ -145,6 +146,8 @@ function placeFigure() {
         }
     }
 
+    let c = 0;
+
     for (let row = playfield.length - 1; row >= 0;) {
         if (playfield[row].every(cell => !!cell)) {
 
@@ -153,11 +156,16 @@ function placeFigure() {
                     playfield[r][c] = playfield[r - 1][c];
                 }
             }
+            c++;
         }
         else {
             row--;
         }
     }
+    if (c === 4) score += 1500;
+    else if (c === 3) score += 700
+    else if (c === 2) score += 300
+    else if (c === 1) score += 100
     figure = getNextFigure();
 }
 
@@ -245,6 +253,17 @@ function loop() {
             }
         }
     }
+
+    let text = "Score: "+ score;
+    context.fillStyle = 'black';
+    context.globalAlpha = 0.75;
+    context.fillRect(0, 640, canvas.width, 32);
+    context.globalAlpha = 1;
+    context.fillStyle = 'white';
+    context.font = '32px monospace';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.fillText(text, canvas.width / 2, canvas.height-14);
 }
 
 rAF = requestAnimationFrame(loop);
