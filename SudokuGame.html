@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <link rel="stylesheet" href="https://style.css">
     <title>Sudoku!</title>
@@ -17,15 +17,18 @@
       в каждом столбце и в каждом малом квадрате 3×3 каждая цифра встречалась
        бы только один раз.
      </p>
-
+    <!-- <p>
+      Уровень сложности
+      <input type="number" id="Level">
+    </p> -->
     <!-- <script src=“script.js”></script> -->
     <!-- создание таблички и генерация чисел для поля-->
-
     <style> #sudoku td{border:1px solid #cdcdcd;background:#f0f8ff;padding: 5px 10px;margin:0;}
             #sudoku .l {margin:1em;padding:0;}
             #sudoku input{height:30px; width:30px; border:20 none;text-align:center;}
     </style>
     <table id="sudoku" cellspacing="0">
+
     <style>
       button.new {
     background: -moz-linear-gradient(#cbf3d5, #7fe77d, #cbf3d6);
@@ -40,14 +43,8 @@
    }
    </style>
     <button class="new" type="submit" id="solve">Показатать решение</button>
-    <!-- <style>
-          #sudoku
-    </style> -->
-    <!-- <form>
-          <input type="button" value="Показать решение">
-    </form>
-    <p>ПК выключен.</p> -->
-    <!-- <table id="sudoku" cellspacing="0"> -->
+    <button type="submit" id="check">Проверить</button>
+
     <script type="text/javascript">
 
             var start = '0748235691216987354359146287923714568164859723875362419432598176591673842687421935' //готовый шаблон (спасибо ларьку за сложные судоку с ответами :) )
@@ -64,27 +61,33 @@
               //таким образом длина сохраняется и элементы тоже, а их порядок нет
             }
 
-
-            var Answer_Arr = Array();
+            var Answer_Arr = Array(0);
+            var Player_Arr = Array(0);
+            //var k = document.getElementById("Level").value;
           	for (var i = 1; i <= 9*9; i++) {
               var rand = Math.floor(Math.random()*10)
           		if (i%9==1) document.write('<tr>'); //делаем строки
               //создаем ячейки и заполняем их
-              var k = 5 //коэфицент сложности, чем больше k, тем меньше заполненых ячеек (то есть сложнее игра). При k=-1 все заполнено
-              //Answer_Arr.push(Num_Arr[start.substr(i,1) - 1]);
+              var k = 0 //коэфицент сложности, чем больше k, тем меньше заполненых ячеек (то есть сложнее игра). При k=-1 все заполнено
+
               if (rand > k) {
                 //если выполняется условие, то вписываем в ячейку номер
                 document.write('<td>' + Num_Arr[start.substr(i,1) - 1] + '</td>');
+                Player_Arr.push(Num_Arr[start.substr(i,1) - 1]);
               }else{
                 //если условие не выполняется, то просто создаем ячейку с параметрами ввода
                 // document.write('<td class="l"> <input type="text" size="1" maxlength="1" onkeydown = "javascript: return ((event.keyCode>47)&&(event.keyCode<58))"> </td>' );
-                  document.write('<td class="l"> <input type= "number" min = 1  max = 10> </td>');
+                  document.write('<td class="l"> <input type="number" id ="ans" min = 0  max = 10> </td>');
+                  var element = document.getElementById("ans").value;  //ПРОБЛЕМА!!!!!!
+                  //Player_Arr.push(0);
+                  Player_Arr.push(element);
               }
+              Answer_Arr.push(Num_Arr[start.substr(i,1) - 1]);
           		// document.write((rand > 5) ? '<td>'+Num_Arr[start.substr(i,1)-1] + '</td>' : '<td class="l"> <input type="text" size="1" maxlength="1" onkeydown = "javascript: return ((event.keyCode>47)&&(event.keyCode<58))"> </td>' );
           		if (i%9==0) document.write('</tr>'); //на девятой строчке останавливаемся
           	}
 
-
+            //функция вывода правильного ответа
             function Answer_Table(tdSz, n) {
                    k = 1
                    mT = n;
@@ -96,7 +99,9 @@
                         document.write("<tr>");
                         for (j = 0; j < mT; j++) {
                           //document.write(td + '1');
-                          document.write('<td>' + Num_Arr[start.substr(k,1) - 1] + '</td>');
+                          //document.write('<td>' + Num_Arr[start.substr(k,1) - 1] + '</td>');
+                          document.write('<td>' + Answer_Arr[k-1] + '</td>');
+                          //document.write('<td>' + Player_Arr[k-1] + '</td>');
                           k+=1
                         }
                         document.write("</tr>");
@@ -105,36 +110,34 @@
                    tbl = document.getElementById("tbl");
             }
 
+            //проверка и подсчет совпадающих элементов массива исходника и
+            // массива пользовательского ввода
+            var count = 0;
+            for (var p = 1; p <= 81; p++){
+              if (Answer_Arr[p] == Player_Arr[p]){
+                count += 1;
+              }
+            }
+
+            //проверка на правильность
+            document.querySelector("#check").onclick = function(){
+                if (count < 81){
+                  window.alert("Неправильно(");
+                }else{
+                  window.alert("Молодец, возьми с полки пирожок");
+                }
+            }
+
+            //выдача правильного ответа
             document.querySelector("#solve").onclick = function(){
               document.write("<h1>Ответ:</h1>");
               Answer_Table('40px', 9);
             }
-            //document.write('<input type="button" value="Показать решение">');
-            //document.write('<input type="button" value = "solve">');
 
-
-            // document.querySelector("#solve").onclick = function(){
-            //   for (var i = 1; i <= 9*9; i++) {
-            //       if (i%9==1) document.write('<tr>');
-            //       document.write('<td>' + Num_Arr[start.substr(i,1) - 1] + '</td>');
-            //       //window.alert(Num_Arr[start.substr(i,1) - 1]);
-            //       //document.write('<td class="l"> <input type= "number" min = 1  max = 10> </td>');
-            //       if (i%9==0) document.write('</tr>');
-            //   }
-            // }
-
-
-            // for (var i = 1; i <= 9*9; i++) {
-            //     if (i%9==1) document.write('<tr>');
-            //     document.write('<td>' + Num_Arr[start.substr(i,1) - 1] + '</td>');
-            //     if (i%9==0) document.write('</tr>');
-            // }
-
-            const button = document.querySelector('input');
-            //const paragraph = document.querySelector('p');
 
   </script>
   </table>
-  </table>
+  <button type="submit" id="NEW">NEW</button>
   </body>
 </html>
+
