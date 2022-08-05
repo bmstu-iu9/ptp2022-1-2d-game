@@ -1,16 +1,29 @@
 html,
 body {
-  height: 100%;
-  margin: 0;
+	height: 100%;
+	margin: 0;
 }
 /*Задаём глобальные параметры*/
 body {
-  background:green;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	align-items: center;
+	justify-content: center;
+	background:green;
+	display: flex;
 }
+
+.buttons {
+	align-items: center;
+	justify-content: center;
+	border: 10px ridge #f00;
+	background-color: #ff0;
+	padding: .5rem;
+	display: flex;
+	flex-direction: column;
+	}
+
 /*Делаем границу вокруг игрового поля*/
 canvas {
-  border: 1px solid black;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid black;
 }
