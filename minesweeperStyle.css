@@ -15,7 +15,8 @@ body {
 	align-items: center;
 	justify-content: center;
 	border: 10px ridge #f00;
-	background-color: #ff0;
+	background-image: url(resources/MainSaper.jpg);
+	background-size: 100%;
 	padding: .5rem;
 	display: flex;
 	flex-direction: column;
