@@ -195,13 +195,15 @@ function drawRestart() {
 function showMines(){
 	alert(game.bombsNumber-game.flagsNumber);
 }
+
 //Обработка щелчков мыши
 document.addEventListener('mousedown', function (e) {
+	field = canvas.getBoundingClientRect();
 	if (game.goes===-1){
 		requestAnimationFrame(drawRestart());
 	}
-
 	else if ((e.clientX<=field.right) && (e.clientX>=field.left) && (e.clientY<=field.bottom) && (e.clientY>=field.top)){
+		grid = Math.floor(canvas.width/actualWidth);
 		var actualX = Math.floor((e.clientX-field.left)/grid);
 		var actualY = Math.floor((e.clientY-field.top)/grid);
 		if (e.which==1){
