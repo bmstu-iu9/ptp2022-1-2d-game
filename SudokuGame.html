@@ -4,19 +4,33 @@
     <title>Sudoku!</title>
   <head>
     <meta charset="utf-8">
+    <style>
+      body {
+        background-image: url(SudMain.jpg);
+        background-size: 100%;
+      }
+    </style>
     <title></title>
   </head>
   <body>
-    <h1> Судоку </h1>
-    <h2>Правила</h2>
+    <h1> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Судоку </h1>
+    <h2>&nbsp &nbsp &nbsp &nbsp Правила</h2>
+    <p>&nbsp;</p>
+    
     <p>
       Игровое поле представляет собой квадрат размером 9×9, разделённый на меньшие квадраты со стороной в 3 клетки.
       Таким образом, всё игровое поле состоит из 81 клетки.
+    </p>
+    <p>
       В них уже в начале игры стоят некоторые числа (от 1 до 9), называемые подсказками.
-      От игрока требуется заполнить свободные клетки цифрами от 1 до 9 так, чтобы в каждой строке,
+      От игрока требуется заполнить свободные клетки цифрами от 1 до 9 так, 
+    </p>
+    <p>
+      чтобы в каждой строке,
       в каждом столбце и в каждом малом квадрате 3×3 каждая цифра встречалась
        бы только один раз.
-     </p>
+      </p>
+     
 
     <!-- <p>
       Уровень сложности
@@ -36,6 +50,8 @@
 
     <style>
       button.new {
+   width: 100px;
+  height: 50px;
     background: -moz-linear-gradient(#cbf3d5, #7fe77d, #cbf3d6);
     background: -webkit-gradient(linear, 0 0, 0  100%, from(#cbf3d5), to(#cbf3d5), color-stop(0.5, #38db43));
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ca34', endColorstr='#caffd3');
@@ -47,12 +63,15 @@
     border: 1px solid #666;
    }
    </style>
-
+   <canvas id="game" width="360" height="360"> </canvas>
+   <p>&nbsp;</p>
+  <p>&nbsp;</p>
     <button class="new" type="submit" id="solve">Показатать решение</button>
-    <button type="submit" id="check">Проверить</button>
+    <button type="submit"   id="check">Проверить</button>
+    <input type="button" onclick="history.back();" value="Назад"/>
     <!-- <button type="submit" id="check1">Проверить правильность программы </button> -->
 
-	<canvas id="game" width="360" height="360"> </canvas>
+	
 
     <script type="text/javascript">
 
@@ -188,7 +207,7 @@
                    }
                    k = 1
                    mT = n;
-                   td = "<td style = 'background-color:#c9ffb3; width:" + tdSz + "; height:" + tdSz + "'";
+                   td = "<td style = 'background-color:#c9ffb3; width:400" + tdSz + "; height:400" + tdSz + "'";
                    td += " onclick = 'sayRC(this)'></td>";
                    tHdr = "<table id = 'tbl' style = 'background-color:#c9ffb3; cursor:pointer'; border = 1px";
                    document.write(tHdr);
@@ -206,6 +225,8 @@
                    }
                    document.write("</table>");
                    tbl = document.getElementById("tbl");
+                   document.write('<a href="' + document.referrer + '">Go Back</a>');
+                   
             }
 
             //проверка и подсчет совпадающих элементов массива исходника и
