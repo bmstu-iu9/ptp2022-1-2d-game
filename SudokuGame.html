@@ -32,7 +32,7 @@
       </p>
      
 
-    <!-- <p>
+      <!-- <p>
       Уровень сложности
       <input type="number" id="Level">
     </p> -->
@@ -49,23 +49,30 @@
 
 
     <style>
-      button.new {
+   button{
    width: 100px;
-  height: 50px;
-    background: -moz-linear-gradient(#cbf3d5, #7fe77d, #cbf3d6);
-    background: -webkit-gradient(linear, 0 0, 0  100%, from(#cbf3d5), to(#cbf3d5), color-stop(0.5, #38db43));
+  height: 30px;
+  background: #8a38db;
+    /* background: -moz-linear-gradient(#cbf3d5, #7fe77d, #cbf3d6);
+    background: -webkit-gradient(linear, 0 0, 0  100%, from(#cbf3d5), to(#cbf3d5), color-stop(0.5, #38db43)); */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ca34', endColorstr='#caffd3');
     padding: 3px 7px;
-    color: #333;
+    color: rgb(26, 15, 143);
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     border: 1px solid #666;
    }
+   button.new{
+    width: 100px;
+    height: 50px;
+    background: -moz-linear-gradient(#cbf3d5, #7fe77d, #cbf3d6);
+    background: -webkit-gradient(linear, 0 0, 0  100%, from(#cbf3d5), to(#cbf3d5), color-stop(0.5, #38db43));
+   }
    </style>
    <canvas id="game" width="360" height="360"> </canvas>
    <p>&nbsp;</p>
-  <p>&nbsp;</p>
+   <p>&nbsp;</p>
     <button class="new" type="submit" id="solve">Показатать решение</button>
     <button type="submit"   id="check">Проверить</button>
     <input type="button" onclick="history.back();" value="Назад"/>
