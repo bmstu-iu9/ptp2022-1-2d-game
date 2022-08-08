@@ -7,7 +7,7 @@ body {
 body {
 	align-items: center;
 	justify-content: center;
-        background-image: url(resources/MainSaper.jpg);
+      background-image: url(resources/MainSaper.jpg);
 	background-size: 100%;
 	display: flex;
 }
@@ -16,7 +16,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	border: 10px ridge #f00;
-	background:red
+	background-color: #ff0;
 	padding: .5rem;
 	display: flex;
 	flex-direction: column;
