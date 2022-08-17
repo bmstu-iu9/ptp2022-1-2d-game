@@ -142,6 +142,7 @@
       		var chosen = -1;
 
       		document.addEventListener('mousedown', function (e) {
+			field = canvas.getBoundingClientRect();
       			if ((e.clientX<=field.right) && (e.clientX>=field.left) && (e.clientY<=field.bottom) && (e.clientY>=field.top)){
       				var X = Math.floor((e.clientX-field.left)/grid);
       				var Y = Math.floor((e.clientY-field.top)/grid);
