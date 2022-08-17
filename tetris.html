@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset = "utf-8"/>
+  <title>Такстрис</title>
+  <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+  button{
+    position: fixed;
+    bottom: 0px;
+    right: 650px; 
+    width: 100px;
+    height: 50px;
+    background: -moz-linear-gradient(#cbf3d5, #7fe77d, #cbf3d6);
+    background: -webkit-gradient(linear, 0 0, 0  100%, from(#cbf3d5), to(#cbf3d5), color-stop(0.5, #38db43));
+   }
+  body {
+    /* background: sandybrown;*/
+    background-image: url(MainTet.png);
+    background-size: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  canvas {
+    border: 4px solid brown;
+  }
+</style>
+</head>
+
+<body>
+<button id="history-button">Вернуться назад</button>
+<!-- <input  type="button" onclick="history.back();" value="Назад"/> -->
+  
+  <canvas width="320" height="672" id="game"></canvas>
+</body>
+</html>
+<script>
+  document.getElementById('history-button').addEventListener('click', () => {
+    history.back();
+  });
+</script>
+<script src="tetris.js"></script>
