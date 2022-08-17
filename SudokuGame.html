@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<link rel="stylesheet" href="https://style.css">
+    <title>Sudoku!</title>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body {
+        background-image: url(SudMain.jpg);
+        background-size: 100%;
+      }
+    </style>
+    <title></title>
+  </head>
+  <body>
+    <h1> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Судоку </h1>
+    <h2>&nbsp &nbsp &nbsp &nbsp Правила</h2>
+    <p>&nbsp;</p>
+    
+    <p>
+      Игровое поле представляет собой квадрат размером 9×9, разделённый на меньшие квадраты со стороной в 3 клетки.
+      Таким образом, всё игровое поле состоит из 81 клетки.
+    </p>
+    <p>
+      В них уже в начале игры стоят некоторые числа (от 1 до 9), называемые подсказками.
+      От игрока требуется заполнить свободные клетки цифрами от 1 до 9 так, 
+    </p>
+    <p>
+      чтобы в каждой строке,
+      в каждом столбце и в каждом малом квадрате 3×3 каждая цифра встречалась
+       бы только один раз.
+      </p>
+     
+
+      <!-- <p>
+      Уровень сложности
+      <input type="number" id="Level">
+    </p> -->
+    <!-- <button type="submit" id="startG">Начать</button> -->
+    <!-- <script src=“script.js”></script> -->
+    <!-- создание таблички и генерация чисел для поля-->
+    <!-- <style> #sudoku td{border:1px solid #cdcdcd;background:#f0f8ff;padding: 5px 10px;margin:0;}
+            #sudoku .l {margin:1em;padding:0;}
+            /* #sudoku .ch {border:1px solid #000427; margin:1em;padding:0;} */
+            #sudoku .ch {border:1px; border-right-color: #000427; border-left-color: #cdcdcd; border-top-color: #cdcdcd; border-bottom-color: #cdcdcd;  margin:1em;padding:0;}
+            #sudoku input{height:30px; width:30px; border:20 none;text-align:center;}
+    </style>
+    <table id="sudoku" cellspacing="0"> -->
+
+
+    <style>
+   button{
+   width: 100px;
+  height: 30px;
+  background: #8a38db;
+    /* background: -moz-linear-gradient(#cbf3d5, #7fe77d, #cbf3d6);
+    background: -webkit-gradient(linear, 0 0, 0  100%, from(#cbf3d5), to(#cbf3d5), color-stop(0.5, #38db43)); */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ca34', endColorstr='#caffd3');
+    padding: 3px 7px;
+    color: rgb(26, 15, 143);
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #666;
+   }
+   button.new{
+    width: 100px;
+    height: 50px;
+    background: -moz-linear-gradient(#cbf3d5, #7fe77d, #cbf3d6);
+    background: -webkit-gradient(linear, 0 0, 0  100%, from(#cbf3d5), to(#cbf3d5), color-stop(0.5, #38db43));
+   }
+   </style>
+   <canvas id="game" width="360" height="360"> </canvas>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+    <button class="new" type="submit" id="solve">Показатать решение</button>
+    <button type="submit"   id="check">Проверить</button>
+    <input type="button" onclick="history.back();" value="Назад"/>
+    <!-- <button type="submit" id="check1">Проверить правильность программы </button> -->
+
+	
+
+    <script type="text/javascript">
+
+            // var k = document.getElementById('Level').value;
+        		var canvas = document.getElementById('game');
+        		var context = canvas.getContext('2d');
+        		var field = canvas.getBoundingClientRect();
+        		var grid = Math.floor(canvas.width/9);
+            //var k = document.getElementById('Level').value;
+
+            var start = '748235691216987354359146287923714568164859723875362419432598176591673842687421935' //готовый шаблон (спасибо ларьку за сложные судоку с ответами :) )
+          	var Num_Arr = Array(1,2,3,4,5,6,7,8,9); //массив из целых чисел
+
+            //перемешаем числа в Num_Arr
+          	for (var i = 0; i < 9; i++){
+              var random_ind = Math.floor(Math.random() * Num_Arr.length);
+              //из массива удаляется 1 элемент с индексом random_ind и в removed записывается удаленный элемент
+              var removed = Num_Arr.splice(random_ind, 1);
+              //добавление в конец массива удаленной переменной
+              Num_Arr.push(removed);
+              //таким образом длина сохраняется и элементы тоже, а их порядок нет
+            }
+
+          var Answer_Arr = Array(0);
+          var Player_Arr = Array(0);
+      		var k = 4;
+
+      		function newGame(){
+      			context.clearRect(0, 0, canvas.width, canvas.width);
+      			context.fillStyle = "black";
+      			context.fillRect(canvas.width-2, 0, 2, canvas.width);
+      			context.fillRect(0, canvas.width-2, canvas.width, 2);
+      			for (var i = 0; i < 9; i++){
+      				if (i%3 == 0){
+      					context.fillRect(i*grid, 0, 2, canvas.width);
+      					context.fillRect(0, i*grid, canvas.width, 2);
+      				} else {
+      					context.fillRect(i*grid, 0, 1, canvas.width);
+      					context.fillRect(0, i*grid, canvas.width, 1);
+      				}
+      			}
+            for (var i = 0; i < 9*9; i++) {
+              		var wid = Math.floor(i/9);
+            			var heit = i-wid*9;
+            			var rand = Math.floor(Math.random()*10);
+          				if (rand > k){
+              					var s = "" + Num_Arr[start.substr(i,1) - 1];
+              					context.fillStyle = "black";
+              					context.font="40px Georgia";
+              					context.fillText(s,(wid+0.25)*grid,(heit+0.75)*grid);
+              					Player_Arr.push(Num_Arr[start.substr(i,1) - 1]);
+              				} else{
+              					Player_Arr.push(0);
+              				  }
+              				//Answer_Arr.push(Num_Arr[start.substr(i,1) - 1]);
+                      Answer_Arr[i] = Num_Arr[start.substr(i,1) - 1];
+      			  }
+          }
+
+      		//
+      		var chosen = -1;
+
+      		document.addEventListener('mousedown', function (e) {
+			field = canvas.getBoundingClientRect();
+      			if ((e.clientX<=field.right) && (e.clientX>=field.left) && (e.clientY<=field.bottom) && (e.clientY>=field.top)){
+      				var X = Math.floor((e.clientX-field.left)/grid);
+      				var Y = Math.floor((e.clientY-field.top)/grid);
+      				if (chosen==-1){
+      					chosen = X*9+Y;
+      					if (Player_Arr[chosen]!=Answer_Arr[chosen]){
+      						requestAnimationFrame(choose(X, Y));
+      					} else{
+      						chosen = -1;
+      					}
+      				} else {
+      					x1 = Math.floor(chosen/9);
+      					y1 = chosen-x1*9;
+      					chosen = X*9+Y;
+      					if (Player_Arr[chosen]!=Answer_Arr[chosen]){
+      						requestAnimationFrame(clear(x1, y1, X, Y));
+      					} else {
+      						chosen = x1*9+y1;
+      					}
+      				}
+      			}
+      		});
+
+      		function choose(x, y){
+      			context.fillStyle = "lightskyblue";
+      			context.fillRect(x*grid+2, y*grid+2, grid-4, grid-4);
+      		}
+      		function clear(a, b, x, y){
+      			context.clearRect(a*grid+2, b*grid+2, grid-4, grid-4);
+      			context.fillStyle = "lightskyblue";
+      			context.fillRect(x*grid+2, y*grid+2, grid-4, grid-4);
+      		}
+      		function putNumber(n, x, y){
+      			context.clearRect(x*grid+2, y*grid+2, grid-4, grid-4);
+      			var s = "" + n;
+      			context.fillStyle = "blue";
+      			context.font="40px Georgia";
+      			context.fillText(s,(x+0.25)*grid,(y+0.75)*grid);
+      		}
+      		document.addEventListener('keypress', function (e) {
+      			if ((chosen!=-1)&&(e.code.substring(0,5) === "Digit")&&(e.code[5]!="0")){
+      				n = Number(e.code[5]);
+      				Player_Arr[chosen] = n;
+      				x = Math.floor(chosen/9);
+      				y = chosen-x*9;
+      				chosen = -1;
+      				requestAnimationFrame(putNumber(n,x,y));
+      			}
+
+      		});
+
+            //функция вывода правильного ответа
+            function Answer_Table(tdSz, n) {
+                    var mas = [];
+                    for (var i = 0; i < 9; i++){
+                        mas[i] = [];
+                        for (var j = 0; j < 9; j++){
+                            mas[i][j] = 0;
+                      }
+                    }
+                    var w = 0;
+                    var h = 0;
+                    for (var i = 0; i < 81; i++){
+                      mas[h][w] = Answer_Arr[i];
+                      h++;
+                      if (i % 9 == 8){
+                        w++;
+                        h=0;
+                      }
+                   }
+                   k = 1
+                   mT = n;
+                   td = "<td style = 'background-color:#c9ffb3; width:400" + tdSz + "; height:400" + tdSz + "'";
+                   td += " onclick = 'sayRC(this)'></td>";
+                   tHdr = "<table id = 'tbl' style = 'background-color:#c9ffb3; cursor:pointer'; border = 1px";
+                   document.write(tHdr);
+                   for (i = 0; i < mT; i++) {
+                        document.write("<tr>");
+                        for (j = 0; j < mT; j++) {
+                          //document.write(td + '1');
+                          //document.write('<td>' + Num_Arr[start.substr(k,1) - 1] + '</td>');
+                          //document.write('<td>' + Answer_Arr[k-1] + '</td>');
+                          document.write('<td>' + mas[i][j] + '</td>');
+                          //document.write('<td>' + Player_Arr[k-1] + '</td>');
+                          k+=1
+                        }
+                        document.write("</tr>");
+                   }
+                   document.write("</table>");
+                   tbl = document.getElementById("tbl");
+                   document.write('<a href="' + document.referrer + '">Go Back</a>');
+                   
+            }
+
+            //проверка и подсчет совпадающих элементов массива исходника и
+            // массива пользовательского ввода
+
+            //проверка на правильность
+            document.querySelector("#check").onclick = function(){
+              	var count = 0;
+              	for (var p = 0; p < 81; p++){
+                		if (Answer_Arr[p] == Player_Arr[p]){
+                  			count += 1;
+                		}
+              	}
+          			if (count < 81){
+          				window.alert("Неправильно(");
+          			}else{
+          				window.alert("Молодец, возьми с полки пирожок");
+          			}
+            }
+
+            //выдача правильного ответа
+            document.querySelector("#solve").onclick = function(){
+              document.write("<h1>Ответ:</h1>");
+              Answer_Table('40px', 9);
+            }
+
+      requestAnimationFrame(newGame());
+
+
+  </script>
+  <!-- </table> -->
+  </body>
+</html>
+
+
