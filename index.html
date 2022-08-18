@@ -4,26 +4,46 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>JS GAME</title>
+  <style>
+    body {
+      background-image: url(img/mainSnake.jpg);
+      background-size: 100%;
+      align-items: center;
+	    justify-content: center;
+    	background-size: 100%;
+	    display: flex;
+    }
+    button{
+    width: 100px;
+    height: 50px;
+    background: -moz-linear-gradient(#cbf3d5, #7fe77d, #cbf3d6);
+    background: -webkit-gradient(linear, 0 0, 0  100%, from(#cbf3d5), to(#cbf3d5), color-stop(0.5, #38db43));
+    position: fixed;
+    bottom: 70px;
+    right: 650px; 
+   }
+   canvas{
+
+    position: fixed;
+    bottom: 150px;
+    right: 400px; 
+   }
+  </style>
+  <title>ТаксаЗмей!</title>
   <link rel="stylesheet" href="css/style.css">
-<style>
-body {
-	align-items: center;
-	justify-content: center;
-	background-size: 100%;
-	display: flex;
-}
-canvas {
-	align-items: center;
-	justify-content: center;
-}
-</style>
 </head>
 <body>
-  <input type="button" onclick="requestAnimationFrame(restart());" value="Начать игру">
-  <input type="button" onclick="history.back();" value="Назад">
-  <canvas id="game" width="608" height="608">
-  </canvas>
+ 
+  <canvas  id="game" width="608" height="608"  ></canvas>
   <script src="js/game.js"></script>
+
+  
+  <button id="history-button">Вернуться назад</button>
+  <input  type="button" onclick="requestAnimationFrame(restart());" value="Начать игру">
 </body>
 </html>  
+<script>
+  document.getElementById('history-button').addEventListener('click', () => {
+    history.back();
+  });
+</script>
