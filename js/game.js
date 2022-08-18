@@ -12,9 +12,11 @@ let box = 32;
 let score = 0;
 
 let food = {
-  x: Math.floor((Math.random() * 17 + 1)) * box,
-  y: Math.floor((Math.random() * 15 + 3)) * box,
+  x: Math.floor(Math.random() * 17 + 1) * box,
+  y: Math.floor(Math.random() * 15 + 3) * box,
 };
+
+let goes = 0;
 
 let snake = [];
 snake[0] = {
@@ -27,22 +29,47 @@ document.addEventListener("keydown", direction);
 let dir;
 
 function direction(event) {
-  if(event.keyCode == 37 && dir != "right")
+  if (goes == -1){
+    requestAnimationFrame(restart());
+  } else{
+  goes = 1;
+  if((event.keyCode == 37 ||  event.keyCode == 65) && dir != "right")
     dir = "left";
-  else if(event.keyCode == 38 && dir != "down")
+  else if((event.keyCode == 38 ||  event.keyCode == 87) && dir != "down")
     dir = "up";
-  else if(event.keyCode == 39 && dir != "left")
+  else if((event.keyCode == 39 ||  event.keyCode == 68) && dir != "left")
     dir = "right";
-  else if(event.keyCode == 40 && dir != "up")
+  else if((event.keyCode == 40 ||  event.keyCode == 83) && dir != "up")
     dir = "down";
-
+  } 
 }
 
 function eatTail(head, arr){
   for( let i = 0; i < arr.length; i++){
-    if(head.x == arr[i].x && head.y == arr[i].y)
+    if(head.x == arr[i].x && head.y == arr[i].y){
+	goes = -1;
       clearInterval(game);
+	alert("you died");
+    }
   }
+}
+
+function restart (){
+  clearInterval(game);
+  ctx.clearRect(box,box*3,box*17,box*15);
+  goes = 0;
+  dir = "";
+  score = 0;
+  snake = [];
+  snake[0] = {
+    x: 9 * box,
+    y: 10 * box
+  };
+  food = {
+    x: Math.floor(Math.random() * 17 + 1) * box,
+    y: Math.floor(Math.random() * 15 + 3) * box,
+  };
+  game = setInterval(drawGame, 100);
 }
 
 function drawGame (){
@@ -74,21 +101,24 @@ function drawGame (){
   }
 
 
-  if(snakeX < box || snakeX > box * 17 || snakeY < box * 3 || snakeY > box * 17)
+  if(snakeX < box || snakeX > box * 17 || snakeY < box * 3 || snakeY > box * 17){
+    goes = -1;
     clearInterval(game);
-  if (dir == "left") snakeX -= box;
-  if (dir == "right") snakeX += box;
-  if (dir == "up") snakeY -= box;
-  if (dir == "down") snakeY += box;
+    alert("you died");
+  } else {
+    if (dir == "left") snakeX -= box;
+    if (dir == "right") snakeX += box;
+    if (dir == "up") snakeY -= box;
+    if (dir == "down") snakeY += box;
+    let newHead = {
+      x: snakeX,
+      y: snakeY
+    };
 
-  let newHead = {
-    x: snakeX,
-    y: snakeY
-  };
+    eatTail(newHead, snake);
 
-  eatTail(newHead, snake);
-
-  snake.unshift(newHead);
+    snake.unshift(newHead);
+  }
 }
 
 

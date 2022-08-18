@@ -6,9 +6,24 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>JS GAME</title>
   <link rel="stylesheet" href="css/style.css">
+<style>
+body {
+	align-items: center;
+	justify-content: center;
+	background-size: 100%;
+	display: flex;
+}
+canvas {
+	align-items: center;
+	justify-content: center;
+}
+</style>
 </head>
 <body>
-  <<canvas id="game" width="608" height="608"></canvas>
+  <input type="button" onclick="requestAnimationFrame(restart());" value="Начать игру">
+  <input type="button" onclick="history.back();" value="Назад">
+  <canvas id="game" width="608" height="608">
+  </canvas>
   <script src="js/game.js"></script>
 </body>
 </html>  
