@@ -2,7 +2,7 @@ var canvas = document.getElementById('game');
 var lvl = document.getElementById('Level');
 var size = document.getElementById('Size');
 var mine = new Image();
-mine.src = "resources/mine.jpg";
+mine.src = "resources/mine.png";
 
 var context = canvas.getContext('2d');
 //Стандартное поле - 9 на 9, стандартное количество мин - 10 (простой уровень сложности)
