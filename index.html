@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    body {
+      background-image: url(img/mainSnake.jpg);
+      background-size: 100%;
+      align-items: center;
+	    justify-content: center;
+	    display: flex;
+    }
+    button.back{
+    	width: 100px;
+    	height: 50px;
+    	background: -moz-linear-gradient(#cbf3d5, #7fe77d, #cbf3d6);
+    	background: -webkit-gradient(linear, 0 0, 0  100%, from(#cbf3d5), to(#cbf3d5), color-stop(0.5, #38db43));
+    	position: fixed;
+    	bottom: 1%;
+    	right: 40%; 
+   }
+    button.start{
+    	width: 100px;
+    	height: 50px;
+    	background: -moz-linear-gradient(#cbf3d5, #7fe77d, #cbf3d6);
+    	background: -webkit-gradient(linear, 0 0, 0  100%, from(#cbf3d5), to(#cbf3d5), color-stop(0.5, #38db43));
+    	position: fixed;
+    	bottom: 1%;
+    	right: 55%; 
+   }
+   canvas{
+    position: flex;
+   }
+  </style>
+  <title>ТаксаЗмей!</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+ 
+  <canvas  id="game" width="608" height="630"  ></canvas>
+  <script src="js/game.js"></script>
+  <button class="start" id="start">Начать игру</button>
+  <button class="back" id="history-button">Вернуться назад</button>
+</body>
+</html>  
+<script>
+  document.getElementById('history-button').addEventListener('click', () => {
+    history.back();
+  });
+  document.getElementById('start').addEventListener('click', () => {
+    restart();
+  });
+</script>
