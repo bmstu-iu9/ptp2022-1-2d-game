@@ -232,7 +232,7 @@ document.addEventListener('mousedown', function (e) {
 			}
 		}
 		// Поставить флажок и убрать флажок.
-		else if (e.which==2){
+		else if ((e.which==2)||(e.which==3)){
 			if (game.openedCells[actualX][actualY]===0){
 				game.openedCells[actualX][actualY]=2;
 				game.flagsNumber++;
