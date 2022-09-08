@@ -183,8 +183,8 @@
       			context.fillText(s,(x+0.25)*grid,(y+0.75)*grid);
       		}
       		document.addEventListener('keypress', function (e) {
-      			if ((chosen!=-1)&&(e.code.substring(0,5) === "Digit")&&(e.code[5]!="0")){
-      				n = Number(e.code[5]);
+      			if ((chosen!=-1)&&(e.keyCode>=49)&&(e.keyCode<=57)){
+      				n = e.keyCode-48;
       				Player_Arr[chosen] = n;
       				x = Math.floor(chosen/9);
       				y = chosen-x*9;
