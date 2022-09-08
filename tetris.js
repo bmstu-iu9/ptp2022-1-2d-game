@@ -56,13 +56,13 @@ const figures = {
 
 
 const colors = {
-    'I': 'peachpuff',
+    'I': 'black',
     'O': 'saddlebrown',
     'T': 'peru',
     'S': 'sienna',
     'Z': 'chocolate',
-    'J': 'lightgrey',
-    'L': 'moccasin'
+    'J': 'grey',
+    'L': 'brown'
 };
 
 let count = 0;
