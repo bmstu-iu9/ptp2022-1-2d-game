@@ -30,22 +30,14 @@
       в каждом столбце и в каждом малом квадрате 3×3 каждая цифра встречалась
        бы только один раз.
       </p>
-     
+     <p>
+        Для ввода числа нужно нажать на клеточку, в которую вы хотите вписать число.
+      </p>
+      <p>
+        Для удаления числа нужно снова нажать на эту кнопку (если число не удаляется, то вы правильно ввели число :) )
+      </p>
 
-      <!-- <p>
-      Уровень сложности
-      <input type="number" id="Level">
-    </p> -->
-    <!-- <button type="submit" id="startG">Начать</button> -->
-    <!-- <script src=“script.js”></script> -->
-    <!-- создание таблички и генерация чисел для поля-->
-    <!-- <style> #sudoku td{border:1px solid #cdcdcd;background:#f0f8ff;padding: 5px 10px;margin:0;}
-            #sudoku .l {margin:1em;padding:0;}
-            /* #sudoku .ch {border:1px solid #000427; margin:1em;padding:0;} */
-            #sudoku .ch {border:1px; border-right-color: #000427; border-left-color: #cdcdcd; border-top-color: #cdcdcd; border-bottom-color: #cdcdcd;  margin:1em;padding:0;}
-            #sudoku input{height:30px; width:30px; border:20 none;text-align:center;}
-    </style>
-    <table id="sudoku" cellspacing="0"> -->
+     
 
 
     <style>
@@ -222,11 +214,9 @@
                    for (i = 0; i < mT; i++) {
                         document.write("<tr>");
                         for (j = 0; j < mT; j++) {
-                          //document.write(td + '1');
-                          //document.write('<td>' + Num_Arr[start.substr(k,1) - 1] + '</td>');
-                          //document.write('<td>' + Answer_Arr[k-1] + '</td>');
+                          
                           document.write('<td>' + mas[i][j] + '</td>');
-                          //document.write('<td>' + Player_Arr[k-1] + '</td>');
+                          
                           k+=1
                         }
                         document.write("</tr>");
@@ -249,9 +239,9 @@
                 		}
               	}
           			if (count < 81){
-          				window.alert("Неправильно(");
+          				window.alert("Неправильно, такса грустит(");
           			}else{
-          				window.alert("Молодец, возьми с полки пирожок");
+          				window.alert("Молодец, такса довольна)");
           			}
             }
 
