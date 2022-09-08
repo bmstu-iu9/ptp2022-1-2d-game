@@ -1,0 +1,30 @@
+html,
+body {
+	height: 100%;
+	margin: 0;
+}
+/*Задаём глобальные параметры*/
+body {
+	align-items: center;
+	justify-content: center;
+   background-image: url(../resources/MainSaper.jpg);
+	background-size: 100%;
+	display: flex;
+}
+
+.buttons {
+	align-items: center;
+	justify-content: center;
+	border: 10px ridge #f00;
+	background-color: #ff0;
+	padding: .5rem;
+	display: flex;
+	flex-direction: column;
+	}
+
+/*Делаем границу вокруг игрового поля*/
+canvas {
+	align-items: center;
+	justify-content: center;
+	border: 1px solid black;
+}

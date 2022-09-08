@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="minesweeperStyle.css">
+	<title> Сапёр </title>
+</head>
+
+
+<body>
+	<div class="buttons">
+		<p>Здесь есть кнопки</p>
+		<input type="button" onclick="requestAnimationFrame(drawRestart());" value="Начать игру"/>
+		<p>Уровень сложности</p>
+		<input type="number" id="Level" min=1 max=9>
+		<p>Размер поля (в клетках)</p>
+		<input type="number" id="Size" min=3 max=60>
+		<p>Узнать оставшееся количество мин</p>
+		<input type="button" onclick="showMines();" value="Мины"/>
+		<p>Вернуться к главной странице</p>
+		<input type="button" onclick="history.back();" value="Назад"/>
+	</div>
+	<canvas id="game" width=540 height=540> </canvas>
+	<script src="minesweeperScript.js"> </script>
+</body>
+
+</html>
