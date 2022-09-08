@@ -32,21 +32,32 @@
             cursor: pointer;
             /* type = "image"; */
         }
-        button.sud {
+         button.sud {
+            position: fixed;
             color: rgb(180, 46, 46);
             background:  url(resources/sud2.jpeg);
+            left:28%;
+            top: 30%;
         }
         button.tet {
+            position: fixed;
             background:  url(resources/tetris.jpeg);
+            top: 30%;
+            left:60%;
         }
         button.snake {
+            position: fixed;
             color: rgb(222, 120, 144);
             background:  url(resources/snake.jpeg);
+            left:28%;
+            top: 60%;
         }
         button.sap {
+            position: fixed;
             background:  url(resources/saper.jpeg);
+            top: 60%;
+            left:60%;
         }
-
     </style>
     <title>Таксы!!!</title>
     <script src="path-to-javascript-file"></script>
@@ -54,32 +65,12 @@
 </head>
 
 <body onload="start()" bgcolor="#000">
-    <p style="margin-left:480px">&nbsp;</p>
-    <p style="margin-left:480px">&nbsp;</p>
-    <p style="margin-left:480px">&nbsp;</p>
-    <p style="margin-left:480px">&nbsp;</p>
-    <p style="margin-left:480px">&nbsp;</p>
-    <p style="margin-left:480px">&nbsp;</p>
-    <p style="margin-left:480px">&nbsp;</p>
-    <p >
-    <!-- <button onclick="document.location='page/new.html'">Переход по ссылке</button> -->
-    <!-- <button class="sud" style="margin-left:400px"  > <a  href="Sudoku.html">SudokuGame </a></button>  -->
-    <button class="sud"  style="margin-left:400px"  onclick="document.location='sudoku/SudokuGame.html'">ТакСудоку</button>
 
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-    <!-- <a href="path_to_file" download="proposed_file_name">Download</a> -->
+    <button class="sud"  onclick="document.location='sudoku/SudokuGame.html'">ТакСудоку</button>
     <button class="tet"    onclick="document.location='tetris/tetris.html'">Такстрис</button>
-    <p style="margin-left:480px">&nbsp;</p>
-    <p style="margin-left:480px">&nbsp;</p>
-    <p style="margin-left:480px">&nbsp;</p>
-    <p>
-    <button class="snake" style="margin-left:400px"  onclick="document.location='snake/index.html'">ТаксаЗмей</button>
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <button class="snake"  onclick="document.location='snake/index.html'">ТаксаЗмей</button>
     <button class="sap"  onclick="document.location='minesweeper/minesweeper.html'">Таксапёр</button>
+
 
 </body>
 
